@@ -1,4 +1,4 @@
-import { Box, ListItem } from "@chakra-ui/react";
+import { Box, Image, ListItem } from "@chakra-ui/react";
 
 import React from "react";
 import { useGetUserQuery } from "../redux/features/api/apiSlice";
@@ -43,13 +43,16 @@ export type UserDataType = {
 };
 
 const UserItem: React.FC<UserItemProps> = ({ userId }) => {
-	const { data: user } = useGetUserQuery({ userLogin: userId }) as {
-		data: UserDataType;
-	};
+	const { data: user, isFetching } = useGetUserQuery({ userLogin: userId });
+
+	if (isFetching) return <div>Loading</div>;
+	if (!user) return null;
+	if (!user?.name) return null;
+
 	return (
 		<ListItem>
-			<Box p={4} bg={"gray.100"} m={2}>
-				<div>{user?.name}</div>
+			<Box p={2} bg={"gray.100"} m={2} rounded={"lg"}>
+				<Image src={user.avatar_url} w={"30%"} rounded={"md"}></Image>
 			</Box>
 		</ListItem>
 	);

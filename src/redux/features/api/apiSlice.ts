@@ -1,5 +1,6 @@
 // Import the RTK Query methods from the React-specific entry point
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { UserDataType } from "../../../components/UserItem";
 
 // Define our single API slice object
 export const apiSlice = createApi({
@@ -28,8 +29,8 @@ export const apiSlice = createApi({
 					"q=" + encodeURIComponent(`location:${location} language:${language}`)
 				}`,
 		}),
-		getUser: builder.query({
-			query: ({ userLogin }: { userLogin: string }) => `/users/${userLogin}`,
+		getUser: builder.query<UserDataType, { userLogin: string }>({
+			query: ({ userLogin }) => `/users/${userLogin}`,
 		}),
 	}),
 });
