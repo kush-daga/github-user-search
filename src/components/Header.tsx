@@ -16,11 +16,11 @@ const Header: React.FC<HeaderProps> = ({
 	triggerFn,
 }) => {
 	return (
-		<>
+		<Box>
 			<Center p={8}>
 				<Heading>Search GitHub Users</Heading>
 			</Center>
-			<Center w="100%" p={8}>
+			<Center mx={"auto"} p={8} bg="gray.50" rounded={"lg"}>
 				<Box display={"flex"} w="100%" px={8} gap={8}>
 					<SearchBar
 						placeholder="Enter Language"
@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({
 					Search
 				</Box>
 			</Center>
-		</>
+		</Box>
 	);
 };
 

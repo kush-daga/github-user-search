@@ -1,4 +1,17 @@
-import { Box, Image, ListItem } from "@chakra-ui/react";
+import { EmailIcon, InfoIcon } from "@chakra-ui/icons";
+import {
+	Box,
+	Flex,
+	Icon,
+	Image,
+	Link,
+	ListItem,
+	Stat,
+	StatLabel,
+	StatNumber,
+	Tag,
+	Text,
+} from "@chakra-ui/react";
 
 import React from "react";
 import { useGetUserQuery } from "../redux/features/api/apiSlice";
@@ -51,9 +64,82 @@ const UserItem: React.FC<UserItemProps> = ({ userId }) => {
 
 	return (
 		<ListItem>
-			<Box p={2} bg={"gray.100"} m={2} rounded={"lg"}>
-				<Image src={user.avatar_url} w={"30%"} rounded={"md"}></Image>
+			<Box
+				p={2}
+				py={4}
+				my={0}
+				rounded={"lg"}
+				display="flex"
+				borderBottom={"black"}
+			>
+				<Image
+					src={user.avatar_url}
+					maxW="20%"
+					rounded={"md"}
+					objectFit="cover"
+				></Image>
+				<Flex
+					mx={4}
+					bg=""
+					w={"100%"}
+					flexDir="column"
+					justifyContent={"space-between"}
+				>
+					<Box>
+						<Flex
+							alignItems={"center"}
+							gap={2}
+							justifyContent={"space-between"}
+						>
+							<Flex gap={2} alignItems={"center"}>
+								<Link href={user.html_url}>
+									<Text fontSize={"2xl"} fontWeight="bold">
+										{user.name}
+									</Text>
+								</Link>
+								<Tag
+									variant={"subtle"}
+									size="md"
+									colorScheme={user.hireable ? "cyan" : "red"}
+								>
+									<Text fontSize={"xs"}>
+										{user.hireable ? "Hireable!" : "Not Hireable!"}
+									</Text>
+								</Tag>
+							</Flex>
+							<Flex alignItems={"end"} gap={2}>
+								<Link href={user.blog}>
+									<InfoIcon />
+								</Link>
+								<Link href={`mailto:${user.email}`}>
+									<EmailIcon />
+								</Link>
+								<Text fontSize={"sm"} color={"gray.700"}>
+									@{user.login}
+								</Text>
+							</Flex>
+						</Flex>
+						<Text fontSize={"md"} my={1.5}>
+							{user.bio}
+						</Text>
+					</Box>
+					<Flex>
+						<Stat>
+							<StatLabel fontSize={"md"}>Repositories</StatLabel>
+							<StatNumber fontSize={"xl"}>{user.public_repos}</StatNumber>
+						</Stat>
+						<Stat>
+							<StatLabel fontSize={"md"}>Gists</StatLabel>
+							<StatNumber fontSize={"xl"}>{user.public_gists}</StatNumber>
+						</Stat>
+						<Stat>
+							<StatLabel fontSize={"md"}>Followers</StatLabel>
+							<StatNumber fontSize={"xl"}>{user.followers}</StatNumber>
+						</Stat>
+					</Flex>
+				</Flex>
 			</Box>
+			<hr />
 		</ListItem>
 	);
 };

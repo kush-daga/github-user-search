@@ -28,12 +28,14 @@ interface ResponseDataProps {
 }
 
 const ResponseData: React.FC<ResponseDataProps> = ({ users }) => {
-	return (
-		<List>
-			{users?.map((user) => {
+	return users ? (
+		<List my={2} h="60vh" overflowY={"scroll"} p={4} bg="gray.50" rounded="lg">
+			{users.map((user) => {
 				return <UserItem userId={user?.login} />;
 			})}
 		</List>
+	) : (
+		<div>Please Search!</div>
 	);
 };
 

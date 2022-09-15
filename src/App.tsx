@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+import { Box, Center, Container } from "@chakra-ui/react";
 import { useState, useEffect, useCallback } from "react";
 import Header from "./components/Header";
 import ResponseData from "./components/ResponseData";
@@ -14,13 +14,26 @@ function App() {
 	}, [location, language]);
 
 	return (
-		<Box w="100vw" p={4} h="100vh" bg="white">
-			<Header
-				setLanguage={setLanguage}
-				setLocation={setLocation}
-				triggerFn={triggerFn}
-			/>
-			<ResponseData users={data?.items} />
+		<Box
+			w="100vw"
+			h={"100vh"}
+			p={16}
+			display="flex"
+			flexDir={"column"}
+			alignItems={"center"}
+		>
+			<Box maxW="960px" p={4} display={"flex"} flexDir="column">
+				<Header
+					setLanguage={setLanguage}
+					setLocation={setLocation}
+					triggerFn={triggerFn}
+				/>
+				{isFetching ? (
+					<div>Loading!</div>
+				) : (
+					<ResponseData users={data?.items} />
+				)}
+			</Box>
 		</Box>
 	);
 }
