@@ -1,4 +1,10 @@
-import { Box, Center, Container } from "@chakra-ui/react";
+import {
+	Box,
+	Center,
+	CircularProgress,
+	Container,
+	Text,
+} from "@chakra-ui/react";
 import { useState, useEffect, useCallback } from "react";
 import Header from "./components/Header";
 import ResponseData from "./components/ResponseData";
@@ -22,14 +28,16 @@ function App() {
 			flexDir={"column"}
 			alignItems={"center"}
 		>
-			<Box maxW="960px" p={4} display={"flex"} flexDir="column">
+			<Box maxW="960px" p={4} w="100%">
 				<Header
 					setLanguage={setLanguage}
 					setLocation={setLocation}
 					triggerFn={triggerFn}
 				/>
 				{isFetching ? (
-					<div>Loading!</div>
+					<Center>
+						<CircularProgress isIndeterminate color="blue.300" my={16} />
+					</Center>
 				) : (
 					<ResponseData users={data?.items} />
 				)}

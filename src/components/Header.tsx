@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({
 	triggerFn,
 }) => {
 	return (
-		<Box>
+		<Box w="100%">
 			<Center p={8}>
 				<Heading>Search GitHub Users</Heading>
 			</Center>

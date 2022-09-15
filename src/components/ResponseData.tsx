@@ -1,4 +1,4 @@
-import { List } from "@chakra-ui/react";
+import { Center, Heading, List, ListItem, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useLazySearchUsersQuery } from "../redux/features/api/apiSlice";
 import UserItem from "./UserItem";
@@ -29,13 +29,27 @@ interface ResponseDataProps {
 
 const ResponseData: React.FC<ResponseDataProps> = ({ users }) => {
 	return users ? (
-		<List my={2} h="60vh" overflowY={"scroll"} p={4} bg="gray.50" rounded="lg">
+		<List
+			my={2}
+			h="60vh"
+			overflowY={"scroll"}
+			p={4}
+			bg="gray.50"
+			rounded="lg"
+			w="100%"
+		>
 			{users.map((user) => {
 				return <UserItem userId={user?.login} />;
 			})}
 		</List>
 	) : (
-		<div>Please Search!</div>
+		<List my={2} p={4} rounded="lg" w="100%">
+			<ListItem>
+				<Center>
+					<Text fontSize="2xl">Please Search</Text>
+				</Center>
+			</ListItem>
+		</List>
 	);
 };
 
